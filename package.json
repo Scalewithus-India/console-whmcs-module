@@ -3,8 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "tailwindcss -i ./assets/css/style.css -o ./assets/css/style.min.css --minify",
-    "watch": "tailwindcss -i ./assets/css/style.css -o ./assets/css/style.min.css --watch --minify"
+    "build": "node build.js",
+    "watch": "node build.js --watch"
   },
   "devDependencies": {
     "bun-types": "latest"
@@ -13,6 +13,12 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "chokidar": "^3.5.3",
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.31",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
     "tailwindcss": "^3.3.5"
   }
 }

@@ -1,3 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.s-whmcs {
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+}
