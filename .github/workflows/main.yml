@@ -21,17 +21,17 @@ jobs:
           # Copy all files from the main branch to the "scalewithus" folder
           cp -r ./* /tmp/scalewithus/
           
-          # Create a zip archive named "scalewithus.zip" containing the "scalewithus" folder
+          # Create a zip archive named "archive.zip" containing the "scalewithus" folder
           cd /tmp/
           zip -r scalewithus.zip /tmp/scalewithus
           
           # Optionally, you can move the archive to a specific location or upload it as an artifact
           # mv scalewithus.zip /tmp/ # Move the archive to a specific location
           # echo "::set-output name=zip-path::/tmp/scalewithus/archive.zip" # Set an output variable to pass the zip file path to the next step
-        working-directory: /tmp/
+        working-directory: ${{ github.workspace }}
 
       - name: Upload Zip Artifact
         uses: actions/upload-artifact@v2
         with:
           name: scalewithus.zip
-          path:  scalewithus
+          path:  /tmp/scalewithus
