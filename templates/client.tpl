@@ -1,16 +1,16 @@
 <link href="modules/servers/scalewithus/assets/css/style.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-<div class="text-left">
-    <h2 class="text-2xl font-semibold">Server Details</h2>
-    <div class="grid grid-cols-2 gap-4 mt-4">
+<div class="text-left bg-white p-4 rounded-lg">
+    <h2 class="font-semibold text-md mb-3">Server Details</h2>
+    <div class="grid grid-cols-2 gap-4 mb-3">
         <div>
             <p class="text-gray-700">
                 <strong>State:</strong>
                 {$service.vm.state|escape}
                 {if $service.vm.state eq 'running'}
-                <i class="fas fa-circle text-green-500"></i>
+                    <i class="fas fa-circle text-green-500"></i>
                 {else}
-                <i class="fas fa-circle text-red-500"></i>
+                    <i class="fas fa-circle text-red-500"></i>
                 {/if}
             </p>
             <p class="text-gray-700"><strong>Username:</strong> {$service.vm.username|escape}</p>
@@ -19,7 +19,7 @@
                 <span class="password" style="display: inline-block;">
                     <input type="password" value="{$service.vm.password|escape}" id="passwordField" disabled>
                 </span>
-                <button class="btn" onclick="copyPassword()">
+                <button class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 ml-2" onclick="copyPassword()">
                     <i class="far fa-copy"></i> Copy
                 </button>
             <div id="copyMessage" style="display: none;">Copied!</div>
@@ -39,49 +39,51 @@
         </div>
     </div>
 
-    <h2 class="font-semibold text-md mb-2 mt-4">Actions</h2>
+    <h2 class="font-semibold text-md mb-3">Actions</h2>
     <div class="flex gap-1 mt-4 text-left">
         {if $service.vm.state eq 'running'}
-        <form method="post" action="clientarea.php?action=productdetails" class="block"
-            onsubmit="return confirm('Are you sure you want to power off?')">
-            <input type="hidden" name="id" value="{$serviceid}" />
-            <input type="hidden" name="modop" value="custom" />
-            <input type="hidden" name="a" value="poweroff" />
-            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Power off</button>
-        </form>
+            <form method="post" action="clientarea.php?action=productdetails" class="block"
+                onsubmit="return confirm('Are you sure you want to power off?')">
+                <input type="hidden" name="id" value="{$serviceid}" />
+                <input type="hidden" name="modop" value="custom" />
+                <input type="hidden" name="a" value="poweroff" />
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Power off</button>
+            </form>
+            <form method="post" action="clientarea.php?action=productdetails"
+                onsubmit="return confirm('Are you sure you want to reset the password?')">
+                <input type="hidden" name="id" value="{$serviceid}" />
+                <input type="hidden" name="modop" value="custom" />
+                <input type="hidden" name="a" value="resetpass" />
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Reset
+                    Password</button>
+            </form>
         {/if}
 
         {if $service.vm.state ne 'running'}
-        <form method="post" action="clientarea.php?action=productdetails" class="block"
-            onsubmit="return confirm('Are you sure you want to start the server?')">
-            <input type="hidden" name="id" value="{$serviceid}" />
-            <input type="hidden" name="modop" value="custom" />
-            <input type="hidden" name="a" value="poweron" />
-            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Start VPS
-                server</button>
-        </form>
+            <form method="post" action="clientarea.php?action=productdetails" class="block"
+                onsubmit="return confirm('Are you sure you want to start the server?')">
+                <input type="hidden" name="id" value="{$serviceid}" />
+                <input type="hidden" name="modop" value="custom" />
+                <input type="hidden" name="a" value="poweron" />
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Start VPS
+                    server</button>
+            </form>
         {/if}
 
-        <form method="post" action="clientarea.php?action=productdetails"
-            onsubmit="return confirm('Are you sure you want to reset the password?')">
-            <input type="hidden" name="id" value="{$serviceid}" />
-            <input type="hidden" name="modop" value="custom" />
-            <input type="hidden" name="a" value="resetpassword" />
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Reset
-                Password</button>
-        </form>
+
 
     </div>
     <div class="mt-4">
-        <h2 class="font-semibold text-md mb-3">Reverse DNS</h2>
+        <h2 class="font-semibold text-md mb-3">Update Reverse DNS</h2>
         {foreach $service.ips as $ip}
-        <div class="grid grid-cols-4 gap-4">
-            <p class="text-gray-700">{$ip.address|escape}</p>
-            <form class="col-span-3 ">
-                <!-- Add input field for reverse DNS -->
-                <input type="text" class="w-full" placeholder="Set Reverse DNS">
-            </form>
-        </div>
+            <div class="grid grid-cols-4 gap-4 bg-gray-200 p-2 px-4 rounded">
+                <p class="text-gray-700 flex items-center">{$ip.address|escape}</p>
+                <form class="col-span-3 flex items-center">
+                    <!-- Add input field for reverse DNS -->
+                    <input type="text" class="w-full p-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 outline-none focus:outline-none focus:ring w-full " placeholder="domain.example.com">
+                    <button class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 ml-2">SAVE</button>
+                </form>
+            </div>
         {/foreach}
     </div>
 </div>

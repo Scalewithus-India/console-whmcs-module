@@ -368,10 +368,11 @@ function scalewithus_ClientArea($params)
         return '';
     }
     return [
-        // 'tabOverviewReplacementTemplate' => "templates/client.tpl",
-        'templatefile' => "templates/client.tpl",
+        'tabOverviewReplacementTemplate' => "templates/client.tpl",
+        // 'templatefile' => "templates/client.tpl",
         'vars' => [
-            'service' => $service['data']
+            'service' => $service['data'],
+            'params' => $params
         ],
     ];
 }
