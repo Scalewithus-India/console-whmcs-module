@@ -1,6 +1,6 @@
 <link href="modules/servers/scalewithus/assets/css/style.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-<div class="text-left bg-white s-whmcs">
+<div class="text-left bg-white s-whmcs rounded">
     <div class="p-4 bg-gray-300">
         <h2 class="font-semibold text-md mb-3">Service Info</h2>
         <div class="text-gray-700">
