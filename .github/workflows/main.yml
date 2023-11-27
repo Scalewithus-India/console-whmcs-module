@@ -23,7 +23,7 @@ jobs:
           
           # Create a zip archive named "archive.zip" containing the "scalewithus" folder
           cd /tmp/
-          zip -r scalewithus.zip /tmp/scalewithus
+          zip -r scalewithus.zip scalewithus
           
           # Optionally, you can move the archive to a specific location or upload it as an artifact
           # mv scalewithus.zip /tmp/ # Move the archive to a specific location
@@ -33,5 +33,5 @@ jobs:
       - name: Upload Zip Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: scalewithus.zip
-          path:  /tmp/scalewithus
+          title: scalewithus
+                - files: [ /tmp/scalewithus.zip ]
