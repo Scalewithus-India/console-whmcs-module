@@ -354,7 +354,7 @@ function scalewithus_ClientAreaAllowedFunctions()
     //     "Power on server"  => "poweron",
     //     "resetpass"  => "resetpass",
     // );
-    return ["poweroff", "poweron", "resetpass"];
+    return ["poweroff", "poweron", "resetpass", "reversedns"];
 }
 
 function scalewithus_ClientArea($params)
@@ -372,7 +372,7 @@ function scalewithus_ClientArea($params)
         // 'templatefile' => "templates/client.tpl",
         'vars' => [
             'service' => $service['data'],
-            'params' => $params
+            'model' => $params['model']
         ],
     ];
 }
@@ -477,7 +477,7 @@ function scalewithus_poweron($params)
 
     $service = do_request("/services/" . $serviceid . '/power-on', "POST", $params['serveraccesshash']);
     if (!$service['success']) {
-        return "Failed to poweroff service";
+        return "Failed to Power on service";
     }
     return "success";
 }
@@ -496,7 +496,46 @@ function scalewithus_resetpass($params)
     $service = do_request("/services/" . $serviceid . '/reset-pass', "POST", $params['serveraccesshash']);
 
     if (!$service['success']) {
-        return "Failed to poweroff service";
+        return "Failed to Reset Passowrd of service";
     }
     return "success";
+}
+
+function scalewithus_reversedns($params)
+{
+    $serviceid = $params['customfields']['serviceid'];
+    $projectid = $params['customfields']['projectid'];
+    if (!$serviceid || !$projectid) return "Service not found";
+    $domain = $_POST["domain"];
+    $ip = $_POST["ip"];
+    // Validate domain
+    if (!preg_match('/^(?!\-)([A-Za-z0-9\-]{1,63}(?<!\-)\.)+[A-Za-z]{2,6}$/', $domain)) {
+        return "Invalid Domain Name";
+    }
+    if (!$ip) {
+        return "No IP Specified.";
+    }
+
+
+    $service = do_request("/services/" . $serviceid . '/reverse-dns/' . $ip , "POST", $params['serveraccesshash'], [
+        'hostname' => $domain,
+    ]);
+    // debugLog( $ip);
+
+    if (!$service['success']) {
+        return "Failed to set reverse dns.";
+    }
+    return "success";
+}
+
+
+function debugLog($message)
+{
+    $logFilePath = dirname(__FILE__) . '/logfile.log';
+    if (is_array($message)) {
+        $message = json_encode($message, JSON_PRETTY_PRINT);
+    }
+    $formattedMessage = "\n[" . date("Y-m-d H:i:s") . "] \n" . $message . "\n";
+
+    file_put_contents($logFilePath, $formattedMessage, FILE_APPEND | LOCK_EX);
 }
