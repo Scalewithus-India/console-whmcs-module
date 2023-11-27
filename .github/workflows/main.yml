@@ -16,17 +16,17 @@ jobs:
       - name: Create Zip Archive
         run: |
           # Create a "scalewithus" folder inside the zip
-          mkdir -p /tmp/scalewithus
+          mkdir -p /tmp/scalewithus/scalewithus
           
           # Copy all files from the main branch to the "scalewithus" folder
-          cp -r ./* /tmp/scalewithus/
+          cp -r ./* /tmp/scalewithus/scalewithus/
           
           # Create a zip archive named "archive.zip" containing the "scalewithus" folder
-          cd /tmp/
-          zip -r scalewithus.zip scalewithus
+          # cd /tmp/
+          # zip -r scalewithus.zip scalewithus
           
           # Optionally, you can move the archive to a specific location or upload it as an artifact
-          mv scalewithus.zip /tmp/scalewithus # Move the archive to a specific location
+          # mv scalewithus.zip /tmp/scalewithus # Move the archive to a specific location
           # echo "::set-output name=zip-path::/tmp/scalewithus/archive.zip" # Set an output variable to pass the zip file path to the next step
         working-directory: ${{ github.workspace }}
 
@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Scalewithus WHMCS Module
-          path: /tmp/scalewithus/scalewithus.zip
+          path: /tmp/scalewithus
