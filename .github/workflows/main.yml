@@ -23,10 +23,10 @@ jobs:
           
           # Create a zip archive named "archive.zip" containing the "scalewithus" folder
           cd /tmp/
-          zip -r scalewithus.zip /tmp/scalewithus/
+          zip -r scalewithus.zip /tmp/scalewithus
           
           # Optionally, you can move the archive to a specific location or upload it as an artifact
-          mv scalewithus.zip /tmp/ # Move the archive to a specific location
+          # mv scalewithus.zip /tmp/ # Move the archive to a specific location
           # echo "::set-output name=zip-path::/tmp/scalewithus/archive.zip" # Set an output variable to pass the zip file path to the next step
         working-directory: ${{ github.workspace }}
 
