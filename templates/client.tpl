@@ -26,11 +26,16 @@
     </div>
     <div class="p-4">
         {if $model.domainstatus eq 'Active'}
+            {if $service.service.status eq 'active'}
             <h2 class="font-semibold text-md mb-3">Server Details</h2>
             <div class="grid grid-cols-2 gap-4 mb-3">
                 <div>
                     <p class="text-gray-700">
                         <strong>State:</strong>
+                        {$service.service.status|escape}
+                    </p>
+                    <p class="text-gray-700">
+                        <strong>VM State:</strong>
                         {$service.vm.state|escape}
                         {if $service.vm.state eq 'running'}
                             <i class="fas fa-circle text-green-500"></i>
@@ -121,6 +126,25 @@
                     </div>
                 {/foreach}
             </div>
+            {/if}
+            {if $service.service.status eq 'processing'}
+            <h2 class="font-semibold text-md mb-3">Server Details</h2>
+            <div class="p-4 bg-indigo-500 text-white rounded-md">
+                Service Processing please wait
+            </div>
+            {/if}
+            {if $service.service.status eq 'setup-faled'}
+                <h2 class="font-semibold text-md mb-3">Server Details</h2>
+                <div class="p-4 bg-orange-600 text-white rounded-md">
+                    Service Failed To setup. Please contact admin
+                </div>
+            {/if}
+            {if $service.service.status eq 'suspended'}
+                <h2 class="font-semibold text-md mb-3">Server Details</h2>
+                <div class="p-4 bg-orange-600 text-white rounded-md">
+                    Service is suspended. 
+                </div>
+            {/if}
         {/if}
     </div>
 

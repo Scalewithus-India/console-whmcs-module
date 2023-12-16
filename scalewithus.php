@@ -336,7 +336,8 @@ function scalewithus_CreateAccount(array $params)
     $results = localAPI('UpdateClientProduct', $postData);
 
     // save username and password
-    $params["model"]->serviceProperties->save(array("username" => $resp['data']['loginUser'], "password" =>  $resp['data']['loginPassword']));
+    $params["model"]->serviceProperties->save(array("username" => $resp['data']['loginUser'], "password" =>  $resp['data']['loginPassword'], "domain" => $params['customfields']['Hostname']));
+    debugLog($params["model"]);
     // Call the local API to update the custom field
     return "success";
 }
