@@ -1,6 +1,7 @@
 <link href="modules/servers/scalewithus/assets/css/style.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-<div class="text-left bg-white scalewithus rounded">
+<div class="scalewithus">
+<div class="text-left bg-white rounded-lg border leading-7 text-base font-['Open_Sans']">
     <div class="p-4 bg-gray-300">
         <h2 class="font-semibold text-md mb-3">Service Info</h2>
         <div class="text-gray-700">
@@ -44,7 +45,7 @@
                         {/if}
                     </p>
                     <p class="text-gray-700"><strong>Username:</strong> {$service.vm.username|escape}</p>
-                    <p class="text-gray-700">
+                    <p class="text-gray-700 flex items-center">
                         <strong>Password:</strong>
                         <span class="password" style="display: inline-block;">
                             <input type="password" value="{$service.vm.password|escape}" id="passwordField" disabled>
@@ -148,6 +149,7 @@
         {/if}
     </div>
 
+</div>
 </div>
 
 <script>
